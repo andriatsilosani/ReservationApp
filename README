@@ -53,9 +53,9 @@ src/
 │ └── db.js # MongoDB connection setup
 │
 ├── controllers/
-│ └── auth/
-│ └── user.controller.js # Handles user register/login logic
-│ └── exchange.controller.js # Handles currency exchange logic
+│ ├── auth/
+│ │ └── auth.controller.js # Handles user register/login logic
+│ └── user.controller.js # Handles CRUD logic
 │
 ├── models/
 │ └── user.model.js # User schema
@@ -64,11 +64,14 @@ src/
 │ ├── auth/
 │ │ └── auth.routes.js # Auth routes (login/register)
 │ └── user.routes.js # User routes (get user info)
-│ └── exchange.routes.js # Currency exchange routes
 │
 ├── utils/
-│ └── user.utils.js # Helper functions for users
-│ └── rate.utils.js # Helper functions for exchange rates
+│ └── validateObjectId.js
+│
+├── validations/
+│   ├── auth/
+│   │ └── auth.validator.js # Validates user register/login logic
+│   └── user.validator.js # Validates CRUD logic
 │
 └── server.js # App entry point
 
