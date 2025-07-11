@@ -4,3 +4,9 @@ export const userUpdateSchema = Joi.object({
     name: Joi.string().min(2).required(),
     lastname: Joi.string().min(2).required(),
 });
+
+export const emailSchema = Joi.object({
+    email: Joi.string().email().required(),
+});
+
+

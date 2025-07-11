@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { findByEmail } from "../../utils/findByEmail.js";
+import crypto from "crypto";
 
 dotenv.config();
 
@@ -54,4 +55,48 @@ export const loginUser = async (req, res) => {
             email: user.email,
         },
     });
+};
+
+export const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    const user = await findByEmail(email);
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    user.resetToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000;
+    await user.save();
+    console.log("User after save:", user);
+
+    const resetLink = `http://localhost:3000/auth/reset-password/${token}`;
+
+    console.log("Reset link (send by email):", resetLink);
+
+    res.status(200).json({ message: "Reset link has been sent to your email" });
+};
+
+export const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    const user = await User.findOne({
+        resetToken: token,
+        resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+        return res.status(400).json({ message: "Invalid or expired token" });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+
+    user.resetToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    res.status(200).json({ message: "Password has been reset successfully" });
 };

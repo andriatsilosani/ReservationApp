@@ -6,10 +6,18 @@ export const userRegisterSchema = Joi.object({
     lastname: Joi.string().min(2).required(),
     password: Joi.string()
         .min(6)
-        .pattern(/^[a-zA-Z0-9]+$/),
+        .pattern(/^[a-zA-Z0-9]+$/)
+        .required(),
 });
 
 export const loginSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
+});
+
+export const resetPasswordSchema = Joi.object({
+    newPassword: Joi.string()
+        .min(6)
+        .pattern(/^[a-zA-Z0-9]+$/)
+        .required(),
 });
