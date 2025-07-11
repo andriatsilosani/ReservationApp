@@ -5,14 +5,14 @@ import {
     forgotPassword,
     resetPassword,
 } from "../../controllers/auth/auth.controller.js";
-import { validateBody } from "../../middlewares/validateBody.middleware.js";
+import { validateBody } from "../../middlewares/validation.middleware.js";
 import { asyncHandler } from "../../middlewares/error.middleware.js";
 import {
     loginSchema,
     resetPasswordSchema,
     userRegisterSchema,
 } from "../../validations/auth/auth.validator.js";
-import { emailSchema } from "../../validations/user.validation.js";
+import { emailSchema } from "../../validations/user.validator.js";
 
 const router = express.Router();
 

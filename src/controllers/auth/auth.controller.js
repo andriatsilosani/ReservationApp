@@ -41,7 +41,7 @@ export const loginUser = async (req, res) => {
         return res.status(401).json({ message: "Invalid Password" });
     }
     const token = jwt.sign(
-        { id: user._id, email: user.email },
+        { id: user._id, email: user.email, role: user.role},
         process.env.JWT_SECRET,
         { expiresIn: "7d" },
     );
@@ -69,9 +69,10 @@ export const forgotPassword = async (req, res) => {
     user.resetToken = token;
     user.resetPasswordExpires = Date.now() + 3600000;
     await user.save();
-    console.log("User after save:", user);
 
-    const resetLink = `http://localhost:3000/auth/reset-password/${token}`;
+    const url = process.env.RESET_URL
+
+    const resetLink = `${url}/${token}`;
 
     console.log("Reset link (send by email):", resetLink);
 

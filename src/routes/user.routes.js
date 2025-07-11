@@ -1,32 +1,31 @@
 import express from "express";
 import {
-    deleteUser,
-    getAll,
-    getUserById,
-    updateUser,
+    deleteProfile,
+    getProfile,
+    updatePassword,
+    updateProfile,
 } from "../controllers/user.controller.js";
-import { validateObjectId } from "../middlewares/validateId.middleware.js";
-import { validateBody } from "../middlewares/validateBody.middleware.js";
+import { authenticate } from "../middlewares/auth.middleware.js";
+import { validateBody } from "../middlewares/validation.middleware.js";
+import { userUpdateSchema } from "../validations/user.validator.js";
+import { passwordSchema } from "../validations/user.validator.js";
 import { asyncHandler } from "../middlewares/error.middleware.js";
-import { userUpdateSchema } from "../validations/user.validation.js";
 
 const router = express.Router();
 
-// get all
-router.get("/users", asyncHandler(getAll));
-
-// get by id
-router.get("/:id", validateObjectId(), asyncHandler(getUserById));
-
-//delete
-router.delete("/:id", validateObjectId(), asyncHandler(deleteUser));
-
-//update
+router.get("/", authenticate, asyncHandler(getProfile));
+router.delete("/", authenticate, asyncHandler(deleteProfile));
 router.put(
-    "/:id",
-    validateObjectId(),
+    "/",
+    authenticate,
     validateBody(userUpdateSchema),
-    asyncHandler(updateUser),
+    asyncHandler(updateProfile),
+);
+router.patch(
+    "/",
+    authenticate,
+    validateBody(passwordSchema),
+    asyncHandler(updatePassword),
 );
 
 export default router;
