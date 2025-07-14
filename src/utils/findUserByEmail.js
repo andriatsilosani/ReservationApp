@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
 
-export const findByEmail = async (email) => {
+export const findUserByEmail = async (email) => {
     return await User.findOne({ email });
 };

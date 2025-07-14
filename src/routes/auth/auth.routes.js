@@ -12,7 +12,7 @@ import {
     resetPasswordSchema,
     userRegisterSchema,
 } from "../../validations/auth/auth.validator.js";
-import { emailSchema } from "../../validations/user.validator.js";
+import { emailSchema } from "../../validations/user/user.validator.js";
 
 const router = express.Router();
 

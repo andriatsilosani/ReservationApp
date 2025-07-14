@@ -1,5 +1,5 @@
-import User from "../models/user.model.js";
-import { userDto } from "../models/dto/user.dto.js";
+import User from "../../../models/user.model.js";
+import { userDto } from "../../../models/dto/user.dto.js";
 import bcrypt from "bcryptjs";
 
 export const getProfile = async (req, res) => {
@@ -12,9 +12,7 @@ export const getProfile = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
     const { name, lastname } = req.body;
-    const user = await User.findByIdAndUpdate(
-        req.user.id,
-        { name, lastname }    );
+    const user = await User.findByIdAndUpdate(req.user.id, { name, lastname });
     if (!user) {
         return res.status(404).json({ message: "User not Found" });
     }

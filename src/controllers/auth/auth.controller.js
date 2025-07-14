@@ -2,7 +2,7 @@ import User from "../../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { findByEmail } from "../../utils/findByEmail.js";
+import { findUserByEmail } from "../../utils/findUserByEmail.js";
 import crypto from "crypto";
 
 dotenv.config();
@@ -10,7 +10,7 @@ dotenv.config();
 export const registerUser = async (req, res) => {
     const { email, name, lastname, password } = req.body;
 
-    const existingUser = await findByEmail(email);
+    const existingUser = await findUserByEmail(email);
     if (existingUser) {
         return res.status(400).json({ message: "Email is already used." });
     }
@@ -31,7 +31,7 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
-    const user = await findByEmail(email);
+    const user = await findUserByEmail(email);
     if (!user) {
         return res.status(404).json({ message: "User not found" });
     }
@@ -41,7 +41,7 @@ export const loginUser = async (req, res) => {
         return res.status(401).json({ message: "Invalid Password" });
     }
     const token = jwt.sign(
-        { id: user._id, email: user.email, role: user.role},
+        { id: user._id, email: user.email, role: user.role },
         process.env.JWT_SECRET,
         { expiresIn: "7d" },
     );
@@ -59,7 +59,7 @@ export const loginUser = async (req, res) => {
 
 export const forgotPassword = async (req, res) => {
     const { email } = req.body;
-    const user = await findByEmail(email);
+    const user = await findUserByEmail(email);
     if (!user) {
         return res.status(404).json({ message: "User not found" });
     }
@@ -70,7 +70,7 @@ export const forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000;
     await user.save();
 
-    const url = process.env.RESET_URL
+    const url = process.env.RESET_URL;
 
     const resetLink = `${url}/${token}`;
 

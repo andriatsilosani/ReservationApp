@@ -4,12 +4,12 @@ import {
     getProfile,
     updatePassword,
     updateProfile,
-} from "../controllers/user.controller.js";
-import { authenticate } from "../middlewares/auth.middleware.js";
-import { validateBody } from "../middlewares/validation.middleware.js";
-import { userUpdateSchema } from "../validations/user.validator.js";
-import { passwordSchema } from "../validations/user.validator.js";
-import { asyncHandler } from "../middlewares/error.middleware.js";
+} from "../../../controllers/user/client/client.controller.js";
+import { authenticate } from "../../../middlewares/auth.middleware.js";
+import { validateBody } from "../../../middlewares/validation.middleware.js";
+import { userUpdateSchema } from "../../../validations/user/user.validator.js";
+import { passwordSchema } from "../../../validations/user/user.validator.js";
+import { asyncHandler } from "../../../middlewares/error.middleware.js";
 
 const router = express.Router();
 

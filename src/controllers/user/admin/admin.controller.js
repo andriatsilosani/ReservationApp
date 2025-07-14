@@ -1,6 +1,6 @@
 import { isValidObjectId } from "mongoose";
-import User from "../models/user.model.js";
-import { userDto } from "../models/dto/user.dto.js";
+import User from "../../../models/user.model.js";
+import { userDto } from "../../../models/dto/user.dto.js";
 
 export const getAll = async (req, res) => {
     const users = await User.find();

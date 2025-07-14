@@ -4,17 +4,17 @@ import {
     getAll,
     getUserById,
     updateUser,
-} from "../controllers/admin.controller.js";
+} from "../../../controllers/user/admin/admin.controller.js";
 import {
     validateObjectId,
     validateBody,
-} from "../middlewares/validation.middleware.js";
-import { asyncHandler } from "../middlewares/error.middleware.js";
-import { userUpdateSchema } from "../validations/user.validator.js";
+} from "../../../middlewares/validation.middleware.js";
+import { asyncHandler } from "../../../middlewares/error.middleware.js";
+import { userUpdateSchema } from "../../../validations/user/user.validator.js";
 import {
     authenticate,
     authorizeAdmin,
-} from "../middlewares/auth.middleware.js";
+} from "../../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
