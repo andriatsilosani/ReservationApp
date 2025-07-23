@@ -55,5 +55,8 @@ export const getAllCourts = async (req, res) => {
 
 export const getOneCourt = async (req, res) => {
     const court = await Court.findById(req.params.id);
+    if (!court) {
+        return res.status(404).json({ message: "court not found" });
+    }
     res.status(200).json(courtDto(court));
 };

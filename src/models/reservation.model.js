@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.model({
+const bookingSchema = new mongoose.Schema({
     courtId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Court",
@@ -30,6 +30,6 @@ const bookingSchema = new mongoose.model({
     },
 });
 
-const Booking = mongoose.model("Booking", courtSchema);
+const Booking = mongoose.model("Reservation", bookingSchema);
 
 export default Booking;

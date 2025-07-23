@@ -19,21 +19,9 @@ import { courtUpdateSchema } from "../../../validations/court/court.validator.js
 
 const router = express.Router();
 
-router.get(
-    "/",
-    authenticate,
-    authorizeAdmin,
-    validateObjectId(),
-    asyncHandler(getAllCourts),
-);
+router.get("/", authenticate, authorizeAdmin, asyncHandler(getAllCourts));
 
-router.post(
-    "/",
-    authenticate,
-    authorizeAdmin,
-    validateObjectId(),
-    asyncHandler(createCourt),
-);
+router.post("/", authenticate, authorizeAdmin, asyncHandler(createCourt));
 
 router.get(
     "/:id",
