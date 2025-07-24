@@ -7,6 +7,8 @@ import clientRoutes from "./src/routes/user/client/client.routes.js";
 import courtAdminRoutes from "./src/routes/court/admin/court.routes.js";
 import bookingRoutes from "./src/routes/reservation/client/reservation.routes.js";
 import dotenv from "dotenv";
+import morgan from 'morgan';
+
 
 const app = express();
 connectDB();
@@ -15,6 +17,8 @@ dotenv.config();
 const port = process.env.PORT;
 
 app.use(express.json());
+
+app.use(morgan('dev'));
 
 app.use("/admin/courts", courtAdminRoutes);
 app.use("/court/reservation", bookingRoutes);

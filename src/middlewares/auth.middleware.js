@@ -4,19 +4,26 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const authenticate = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return res.status(401).json({ message: "No token Provided" });
-    }
+    console.log("🔐 Authenticate middleware started");
 
-    const token = authHeader.split(" ")[1];
-    const jwtSecret = process.env.JWT_SECRET;
     try {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            console.log("❌ No token provided");
+            return res.status(401).json({ message: "No token provided" });
+        }
+
+        const token = authHeader.split(" ")[1];
+        const jwtSecret = process.env.JWT_SECRET;
+
         const decoded = jwt.verify(token, jwtSecret);
+        console.log("✅ Token verified", decoded);
+
         req.user = decoded;
         next();
     } catch (error) {
-        console.error(error);
+        console.error("❌ Authentication error:", error);
         return res.status(401).json({ message: "Invalid token" });
     }
 };

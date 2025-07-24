@@ -24,14 +24,14 @@ router.post(
 router.get(
     "/:id",
     authenticate,
-    validateObjectId,
+    validateObjectId(),
     asyncHandler(viewMyReservation),
 );
 
 router.delete(
     "/:id",
     authenticate,
-    validateObjectId,
+    validateObjectId(),
     asyncHandler(cancelReservation),
 );
 
