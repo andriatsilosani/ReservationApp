@@ -4,7 +4,7 @@ import {
     getAll,
     getUserById,
     updateUser,
-} from "../../../controllers/user/admin/admin.controller.js";
+} from "../../controllers/user/admin.controller.js";
 import {
     validateObjectId,
     validateBody,

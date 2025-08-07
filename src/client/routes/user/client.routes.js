@@ -4,7 +4,7 @@ import {
     getProfile,
     updatePassword,
     updateProfile,
-} from "../../../controllers/user/client/client.controller.js";
+} from "../../controllers/user/client.controller.js";
 import { authenticate } from "../../../middlewares/auth.middleware.js";
 import { validateBody } from "../../../middlewares/validation.middleware.js";
 import { userUpdateSchema } from "../../../validations/user/user.validator.js";

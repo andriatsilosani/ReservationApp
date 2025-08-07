@@ -2,37 +2,46 @@ import express from "express";
 import {
     cancelReservation,
     createReservation,
-    viewMyReservation,
+    viewAllReservations,
+    viewOneReservation,
 } from "../../controllers/reservation/reservation.controller.js";
-import {
-    validateBody,
-    validateObjectId,
-} from "../../../middlewares/validation.middleware.js";
 import { asyncHandler } from "../../../middlewares/error.middleware.js";
+import {
+    authenticate,
+    authorizeAdmin,
+} from "../../../middlewares/auth.middleware.js";
+import { validateBody } from "../../../middlewares/validation.middleware.js";
 import { createReservationSchema } from "../../../validations/reservation/reservation.validator.js";
-import { authenticate } from "../../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post(
+router.get(
     "/",
     authenticate,
-    validateBody(createReservationSchema),
-    asyncHandler(createReservation),
+    authorizeAdmin,
+    asyncHandler(viewAllReservations),
 );
 
 router.get(
     "/:id",
     authenticate,
-    validateObjectId(),
-    asyncHandler(viewMyReservation),
+    authorizeAdmin,
+    asyncHandler(viewOneReservation),
 );
 
 router.delete(
     "/:id",
     authenticate,
-    validateObjectId(),
+    authorizeAdmin,
     asyncHandler(cancelReservation),
+);
+
+router.post(
+    "/",
+    authenticate,
+    authorizeAdmin,
+    validateBody(createReservationSchema),
+    asyncHandler(createReservation),
 );
 
 export default router;

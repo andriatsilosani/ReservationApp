@@ -4,14 +4,14 @@ import {
     loginUser,
     forgotPassword,
     resetPassword,
-} from "../../controllers/auth/auth.controller.js";
+} from "../controllers/auth.controller.js";
 import { validateBody } from "../../middlewares/validation.middleware.js";
 import { asyncHandler } from "../../middlewares/error.middleware.js";
 import {
     loginSchema,
     resetPasswordSchema,
     userRegisterSchema,
-} from "../../validations/auth/auth.validator.js";
+} from "../validations/auth.validator.js";
 import { emailSchema } from "../../validations/user/user.validator.js";
 
 const router = express.Router();

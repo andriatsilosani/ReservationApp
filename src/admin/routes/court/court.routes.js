@@ -5,7 +5,7 @@ import {
     getAllCourts,
     getOneCourt,
     updateCourt,
-} from "../../../controllers/court/admin/court.controller.js";
+} from "../../controllers/Court/court.controller.js";
 import { asyncHandler } from "../../../middlewares/error.middleware.js";
 import {
     authenticate,

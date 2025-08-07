@@ -1,14 +1,14 @@
 import express from "express";
 import chalk from "chalk";
 import connectDB from "./src/config/db.js";
-import authRoutes from "./src/routes/auth/auth.routes.js";
-import adminRoutes from "./src/routes/user/admin/admin.routes.js";
-import clientRoutes from "./src/routes/user/client/client.routes.js";
-import courtAdminRoutes from "./src/routes/court/admin/court.routes.js";
-import bookingRoutes from "./src/routes/reservation/client/reservation.routes.js";
+import authRoutes from "./src/auth/routes/auth.routes.js";
+import adminRoutes from "./src/admin/routes/user/admin.routes.js";
+import clientRoutes from "./src/client/routes/user/client.routes.js";
+import courtAdminRoutes from "./src/admin/routes/court/court.routes.js";
+import bookingRoutes from "./src/client/routes/reservation/reservation.routes.js";
+import reservationAdminRoutes from "./src/admin/routes/reservation/reservation.routes.js";
 import dotenv from "dotenv";
-import morgan from 'morgan';
-
+import morgan from "morgan";
 
 const app = express();
 connectDB();
@@ -18,9 +18,10 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-app.use("/admin/courts", courtAdminRoutes);
+app.use("/admin/court/reservaiton", reservationAdminRoutes);
+app.use("/admin/court", courtAdminRoutes);
 app.use("/court/reservation", bookingRoutes);
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);

@@ -1,6 +1,29 @@
 import Booking from "../../../models/reservation.model.js";
 import { bookingDto } from "../../../models/dto/reservation.dto.js";
 
+export const viewAllReservations = async (req, res) => {
+    const reservations = await Booking.find();
+    res.status(200).json(reservations);
+};
+
+export const viewOneReservation = async (req, res) => {
+    const { id } = req.params;
+    const reservation = await Booking.findById(id);
+    if (!reservation) {
+        return res.status(404).json({ message: "Reservation not Found" });
+    }
+    res.status(200).json(reservation);
+};
+
+export const cancelReservation = async (req, res) => {
+    const { id } = req.params;
+    const reservation = await Booking.findByIdAndDelete(id);
+    if (!reservation) {
+        return res.status(404).json({ message: "Reservation not Found" });
+    }
+    res.status(200).json({ message: "Reservation Canceled Successfully" });
+};
+
 export const createReservation = async (req, res) => {
     const { courtId, date, startTime, endTime } = req.body;
     const userId = req.user.id;
@@ -32,27 +55,4 @@ export const createReservation = async (req, res) => {
         message: "reservation completed",
         reservation: bookingDto(reservation),
     });
-};
-
-export const cancelReservation = async (req, res) => {
-    const reservation = await Booking.findByIdAndDelete(req.params.id);
-
-    if (!reservation) {
-        return res.status(404).json({ message: "reservation not found" });
-    }
-    res.status(200).json({ message: "reservation canceled" });
-};
-
-export const viewMyReservation = async (req, res) => {
-    const reservation = await Booking.findById(req.params.id);
-    if (!reservation) {
-        return res.status(404).json({ message: "Reservation not found" });
-    }
-    if (reservation.userId.toString() !== req.user.id) {
-        return res.status(403).json({
-            message:
-                "Access denied. You are not authorized to view this reservation.",
-        });
-    }
-    res.status(200).json(bookingDto(reservation));
 };
