@@ -1,12 +1,14 @@
 import express from "express";
 import chalk from "chalk";
 import connectDB from "./src/config/db.js";
-import authRoutes from "./src/auth/routes/auth.routes.js";
-import adminRoutes from "./src/admin/routes/user/admin.routes.js";
-import clientRoutes from "./src/client/routes/user/client.routes.js";
-import courtAdminRoutes from "./src/admin/routes/court/court.routes.js";
-import bookingRoutes from "./src/client/routes/reservation/reservation.routes.js";
-import reservationAdminRoutes from "./src/admin/routes/reservation/reservation.routes.js";
+import authUserRoutes from "./src/auth/user/routes/auth.routes.js";
+import adminRoutes from "./src/user/admin/routes/user/admin.routes.js";
+import clientRoutes from "./src/user/client/routes/user/client.routes.js";
+import courtAdminRoutes from "./src/user/admin/routes/court/court.routes.js";
+import bookingRoutes from "./src/user/client/routes/reservation/reservation.routes.js";
+import reservationAdminRoutes from "./src/user/admin/routes/reservation/reservation.routes.js";
+import authCompanyRoutes from "./src/auth/company/routes/auth.routes.js";
+import courtAuthorRoutes from "./src/user/author/routes/courts/court.routes.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
@@ -23,9 +25,11 @@ app.use(morgan("dev"));
 app.use("/admin/court/reservaiton", reservationAdminRoutes);
 app.use("/admin/court", courtAdminRoutes);
 app.use("/court/reservation", bookingRoutes);
-app.use("/auth", authRoutes);
+app.use("/auth/user", authUserRoutes);
+app.use("/auth/company", authCompanyRoutes);
 app.use("/admin", adminRoutes);
 app.use("/profile", clientRoutes);
+app.use("/company/court", courtAuthorRoutes);
 
 app.listen(port, () => {
     console.log(chalk.green(`App listening on port ${port}`));
