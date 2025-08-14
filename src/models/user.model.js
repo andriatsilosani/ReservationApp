@@ -22,9 +22,10 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        enum: ["client", "admin"],
+        enum: ["client", "admin", "editor", "author"],
         default: "client",
     },
+    company: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
     newPassowrd: String,
     confirmPassword: String,
     resetToken: String,

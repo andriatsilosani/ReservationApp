@@ -1,8 +1,9 @@
-export const courtDto = (court) => {
+import { companyDto } from "./company.dto.js";
+
+export const courtDto = (court, company) => {
     return {
-        name: court.name,
+        company: companyDto(company),
         courtNumber: court.courtNumber,
-        location: court.location,
         description: court.description,
         price: court.price,
         sport: court.sport,
