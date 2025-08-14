@@ -1,8 +1,8 @@
-import User from "../../models/user.model.js";
+import User from "../../../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { findUserByEmail } from "../../utils/findUserByEmail.js";
+import { findUserByEmail } from "../../../utils/findUserByEmail.js";
 import crypto from "crypto";
 
 dotenv.config();
