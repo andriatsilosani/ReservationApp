@@ -2,10 +2,14 @@ import mongoose from "mongoose";
 
 const courtSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
+        company: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Company",
             required: true,
-            unique: true,
+        },
+        courtNumber: {
+            type: Number,
+            required: true,
         },
         location: {
             type: String,
@@ -32,6 +36,8 @@ const courtSchema = new mongoose.Schema(
         timestamps: true,
     },
 );
+
+courtSchema.index({ company: 1, courtNumber: 1 }, { unique: true });
 
 const Court = mongoose.model("Court", courtSchema);
 
