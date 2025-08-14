@@ -1,5 +1,5 @@
-import Booking from "../../../models/reservation.model.js";
-import { bookingDto } from "../../../models/dto/reservation.dto.js";
+import Booking from "../../../../models/reservation.model.js";
+import { bookingDto } from "../../../../models/dto/reservation.dto.js";
 
 export const createReservation = async (req, res) => {
     const { courtId, date, startTime, endTime } = req.body;

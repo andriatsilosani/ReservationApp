@@ -7,10 +7,10 @@ import {
 import {
     validateBody,
     validateObjectId,
-} from "../../../middlewares/validation.middleware.js";
-import { asyncHandler } from "../../../middlewares/error.middleware.js";
-import { createReservationSchema } from "../../../validations/reservation/reservation.validator.js";
-import { authenticate } from "../../../middlewares/auth.middleware.js";
+} from "../../../../middlewares/validation.middleware.js";
+import { asyncHandler } from "../../../../middlewares/error.middleware.js";
+import { createReservationSchema } from "../../../../validations/reservation/reservation.validator.js";
+import { authenticate } from "../../../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
