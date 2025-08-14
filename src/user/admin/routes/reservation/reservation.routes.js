@@ -5,13 +5,13 @@ import {
     viewAllReservations,
     viewOneReservation,
 } from "../../controllers/reservation/reservation.controller.js";
-import { asyncHandler } from "../../../middlewares/error.middleware.js";
+import { asyncHandler } from "../../../../middlewares/error.middleware.js";
 import {
     authenticate,
     authorizeAdmin,
-} from "../../../middlewares/auth.middleware.js";
-import { validateBody } from "../../../middlewares/validation.middleware.js";
-import { createReservationSchema } from "../../../validations/reservation/reservation.validator.js";
+} from "../../../../middlewares/auth.middleware.js";
+import { validateBody } from "../../../../middlewares/validation.middleware.js";
+import { createReservationSchema } from "../../../../validations/reservation/reservation.validator.js";
 
 const router = express.Router();
 
