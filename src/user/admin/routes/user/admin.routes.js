@@ -8,13 +8,13 @@ import {
 import {
     validateObjectId,
     validateBody,
-} from "../../../middlewares/validation.middleware.js";
-import { asyncHandler } from "../../../middlewares/error.middleware.js";
-import { userUpdateSchema } from "../../../validations/user/user.validator.js";
+} from "../../../../middlewares/validation.middleware.js";
+import { asyncHandler } from "../../../../middlewares/error.middleware.js";
+import { userUpdateSchema } from "../../../../validations/user/user.validator.js";
 import {
     authenticate,
     authorizeAdmin,
-} from "../../../middlewares/auth.middleware.js";
+} from "../../../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
-import Booking from "../../../models/reservation.model.js";
-import { bookingDto } from "../../../models/dto/reservation.dto.js";
+import Booking from "../../../../models/reservation.model.js";
+import { bookingDto } from "../../../../models/dto/reservation.dto.js";
 
 export const viewAllReservations = async (req, res) => {
     const reservations = await Booking.find();

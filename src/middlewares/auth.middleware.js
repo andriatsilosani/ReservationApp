@@ -35,3 +35,11 @@ export const authorizeAdmin = (req, res, next) => {
         return res.status(403).json({ message: "Forbidden: Admins only" });
     }
 };
+
+export const authorizeAuthor = (req, res, next) => {
+    if (["admin", "author"].includes(req.user.role)) {
+        next();
+    } else {
+        return res.status(403).json({ message: "Forbidden: Wrong role" });
+    }
+};
