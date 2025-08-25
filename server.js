@@ -9,6 +9,7 @@ import bookingRoutes from "./src/user/client/routes/reservation/reservation.rout
 import reservationAdminRoutes from "./src/user/admin/routes/reservation/reservation.routes.js";
 import authCompanyRoutes from "./src/auth/company/routes/auth.routes.js";
 import courtAuthorRoutes from "./src/user/author/routes/courts/court.routes.js";
+import companyAuthorRoutes from "./src/user/author/routes/company/company.routes.js";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
@@ -30,6 +31,7 @@ app.use("/auth/company", authCompanyRoutes);
 app.use("/admin", adminRoutes);
 app.use("/profile", clientRoutes);
 app.use("/company/court", courtAuthorRoutes);
+app.use("/company", companyAuthorRoutes);
 
 app.listen(port, () => {
     console.log(chalk.green(`App listening on port ${port}`));

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 export const companyRegisterSchema = Joi.object({
     name: Joi.string().required(),
-    address: Joi.string(),
+    location: Joi.string(),
     phone: Joi.string()
         .pattern(/^\d{9}$/)
         .required()
