@@ -19,7 +19,9 @@ export const deleteCompany = async (req, res) => {
 
 export const updateCompany = async (req, res) => {
     const { location } = await req.body;
-    const company = Company.findByIdAndUpdate(req.params.id, { location });
+    const company = await Company.findByIdAndUpdate(req.params.id, {
+        location,
+    });
     if (!company) {
         return res.status(404).json({ message: "company not found" });
     }

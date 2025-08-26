@@ -22,15 +22,15 @@ router.get(
 );
 
 router.delete(
-    ":/id",
+    "/:id",
     authenticate,
     authorizeAuthor,
-    validateObjectId,
+    validateObjectId(),
     asyncHandler(deleteCompany),
 );
 
 router.patch(
-    ":id",
+    "/:id",
     authenticate,
     authorizeAuthor,
     validateObjectId(),
