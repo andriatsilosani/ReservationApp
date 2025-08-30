@@ -18,10 +18,8 @@ import {
 
 const router = express.Router();
 
-// get all
 router.get("/users", authenticate, authorizeAdmin, asyncHandler(getAll));
 
-// get by id
 router.get(
     "/:id",
     authenticate,
@@ -30,7 +28,6 @@ router.get(
     asyncHandler(getUserById),
 );
 
-//delete
 router.delete(
     "/:id",
     authenticate,
@@ -39,7 +36,6 @@ router.delete(
     asyncHandler(deleteUser),
 );
 
-//update
 router.put(
     "/:id",
     authenticate,
